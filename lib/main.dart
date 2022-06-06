@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(
       MaterialApp(
@@ -17,8 +18,15 @@ void main() => runApp(
       ),
     );
 
-class AskMeAnything extends StatelessWidget {
+class AskMeAnything extends StatefulWidget {
   const AskMeAnything({Key? key}) : super(key: key);
+
+  @override
+  State<AskMeAnything> createState() => _AskMeAnythingState();
+}
+
+class _AskMeAnythingState extends State<AskMeAnything> {
+  int ballNo = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +35,13 @@ class AskMeAnything extends StatelessWidget {
         Expanded(
             child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Image.asset('images/ball5.png'),
+          child: TextButton(
+              onPressed: () {
+                setState(() {
+                  ballNo = Random().nextInt(4) + 1;
+                });
+              },
+              child: Image.asset('images/ball$ballNo.png')),
         )),
       ],
     );
